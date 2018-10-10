@@ -27,7 +27,7 @@ npm test
 To run tests with coverage
 
 ```
-npm test:coverage
+npm run test:coverage
 ```
 
 To start the client
