@@ -36,6 +36,10 @@ To start the client
 npm start
 ```
 
+## Application overview
+
+Take a look at client/index.js and go from there.
+
 # Brief
 
 ## The Problem
