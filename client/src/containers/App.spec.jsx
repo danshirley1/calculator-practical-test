@@ -1,5 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import configureStore from 'redux-mock-store';
+import { Provider } from 'react-redux';
 
 import { App } from './App';
 
@@ -28,8 +30,9 @@ describe('App Container', () => {
     component = getComponent();
   });
 
-  it('renders without crashing', () => {
-    shallow(<App />);
+  it('renders connected Container without crashing', () => {
+    const mockStore = configureStore();
+    shallow(<Provider store={mockStore({})}><App /></Provider>);
   });
 
   it('renders Calculator component with expected props', () => {
