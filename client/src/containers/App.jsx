@@ -1,28 +1,42 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import logo from '../logo.svg';
+import logo from '../ee_logo.svg';
 import '../styles/main.scss';
+import { setNumericInput, setOperandInput, calculateExpression } from '../features/calculator/calculator.actions';
+import Calculator from '../components/Calculator';
 
-export const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit <code>src/App.js</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-  </div>
-);
+export const App = (props) => {
+  const { calcState, onNumericKeypress, onOperandKeypress, onEqualsKeypress } = props;
 
-export default connect(state => ({
-  calcState: state.calcState,
-}))(App);
+  return (
+    <Fragment>
+      <div className="container-fluid app-header">
+        <img src={logo} className="app-logo" alt="logo" />
+      </div>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <Calculator
+              calcState={calcState}
+              onNumericKeypress={onNumericKeypress}
+              onOperandKeypress={onOperandKeypress}
+              onEqualsKeypress={onEqualsKeypress}
+            />
+          </div>
+        </div>
+      </div>
+    </Fragment>
+  );
+}
+
+export default connect(
+  state => ({
+    calcState: state.calcState,
+  }),
+  {
+    onNumericKeypress: setNumericInput,
+    onOperandKeypress: setOperandInput,
+    onEqualsKeypress: calculateExpression,
+  },
+)(App);
